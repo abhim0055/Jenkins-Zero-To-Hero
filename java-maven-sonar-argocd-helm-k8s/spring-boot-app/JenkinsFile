@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        git branch: 'main', credentialsId: 'github', url: 'https://github.com/abhim0055/Jenkins-Zero-To-Hero.git' {
+        // git branch: 'main', credentialsId: 'github', url: 'https://github.com/abhim0055/Jenkins-Zero-To-Hero.git' {
   agent {
     docker {
       image 'abhishekf5/maven-abhishek-docker-agent:v1'

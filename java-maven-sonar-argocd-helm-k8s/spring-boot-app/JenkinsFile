@@ -20,5 +20,12 @@ pipeline {
                 git branch: 'main', credentialsId: 'github-auth', url: 'https://github.com/abhim0055/Jenkins-Zero-To-Hero.git'
             }
         }
+        stage('Build and Test') {
+            steps {
+                sh 'ls -ltr'
+                // build the project and create a JAR file
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+            }
+        }
     }
 }

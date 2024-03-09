@@ -12,4 +12,5 @@ pipeline {
                 git branch: 'main', credentialsId: 'github-auth', url: 'https://github.com/abhim0055/Jenkins-Zero-To-Hero.git'
             }
         }
+    } // This closing curly brace was missing in your provided script
 }

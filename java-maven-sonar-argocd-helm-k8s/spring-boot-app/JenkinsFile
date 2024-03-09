@@ -27,12 +27,18 @@ pipeline {
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
             }
         }
-        stage('SonarQube Analysis') {
+        stage('Static Code Analysis') {
+            environment {
+                SONAR_URL = "http://192.168.111.215:9000" // Replace with your SonarQube server URL
+            }
             steps {
+                // Run Maven with SonarQube analysis
                 script {
-                    def scannerHome = tool 'sonarqube-auth'
-                    withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                    // Use withCredentials to securely provide the SonarQube token
+                    withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                        // Inside this block, you can access the credential value using the specified variable name
+                        // The credential value will be securely injected into the environment variable SONAR_AUTH_TOKEN
+                        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
                     }
                 }
             }

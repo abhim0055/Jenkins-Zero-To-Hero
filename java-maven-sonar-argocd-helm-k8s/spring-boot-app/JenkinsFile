@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
             environment {
-                SONAR_URL = "http://192.168.111.215:9000" // Replace with your SonarQube server URL
+                SONAR_URL = "http://192.168.79.215:9000" // Replace with your SonarQube server URL
             }
             steps {
                 // Run Maven with SonarQube analysis

@@ -33,13 +33,11 @@ pipeline {
             }
             steps {
                 // Run Maven with SonarQube analysis
-                script {
                     // Use withCredentials to securely provide the SonarQube token
                     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
                         // Inside this block, you can access the credential value using the specified variable name
                         // The credential value will be securely injected into the environment variable SONAR_AUTH_TOKEN
                         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn -X sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-                    }
                 }
             }
         }
